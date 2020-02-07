@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="moment.js"></script>
+    <script src="script.js"></script>
     <title>Scores Tracker</title>
 </head>
 <body>
@@ -14,12 +15,24 @@
             <span class="navbar-brand mb-0 h1">Score Tracker</span>
         </nav>
         
-        <div class="contianer">
-            <div id="scores"></div>
+    <div class="contianer">
 
+        <div class="row">
+            <div class="col">
+                <form class="form-inline" id="date-input">
+                    <input type="text" class="form-control" placeholder="Year: YYYY" id="year-input">
+                    <input type="text" class="form-control" placeholder="Month: MM" id="month-input">
+                    <input type="text" class="form-control" placeholder="Day: DD" id="day-input">
+                    <button type="submit" class="btn btn-primary my-1" id="submit">Submit</button>
+                </form>
+            </div>
         </div>
-       
-        <script src="script.js">
-        </script>
+            
+        <div class="row" id="scores">
+            
+              
+        </div>
+    </div>
+        
 </body>
 </html>

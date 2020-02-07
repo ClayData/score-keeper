@@ -1,12 +1,21 @@
+$(document).ready(function(){
 
-m = moment().format('YYYY-MM-DD')
+$("#submit").on("click", function (){
+	event.preventDefault()
+	var yearInput = $("#year-input").val();
+	var monthInput = $("#month-input").val();
+	var dayInput = $("#day-input").val(); 
+	console.log(yearInput)
+	displayNbaScores(yearInput, monthInput, dayInput);
+})
 
-function displayNbaScores(){
+
+function displayNbaScores(y, m, d){
 
 var settings = {
 	"async": true,
 	"crossDomain": true,
-	"url": "https://api-basketball.p.rapidapi.com/games?league=12&season=2019-2020&date=" + m + "&timezone=America/Menominee",
+	"url": "https://api-basketball.p.rapidapi.com/games?league=12&season=2019-2020&date=" + y + "-"+ m + "-" + d + "&timezone=America/Menominee",
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "api-basketball.p.rapidapi.com",
@@ -14,16 +23,35 @@ var settings = {
 	}
 }
 
-
-
-
 $.ajax(settings).then(function (response) {
     console.log(response);
-    console.log(response.response[1])
-    var homeScore = $("<div>").text(JSON.stringify(response.response[1].scores.home.total))
-    $("body").append(homeScore);
+	var results = response.response;
+	
+	for(var i = 0; i < results.length; i++){
+		//Home scores and teams
+		var homeBox = $("<ul>").attr("class", "list-group");
+		var homeTeam = $("<li>").attr("class", "list-group-item");
+		homeTeam.text(JSON.stringify(results[i].teams.home.name));
+		var homeScore = $("<li>").attr("class", "list-group-item");
+		homeScore.text(JSON.stringify(results[i].scores.home.total));
+		//Away scores and teams
+		var awayBox = $("<ul>").attr("class", "list-group");
+		var awayTeam = $("<li>").attr("class", "list-group-item");
+		awayTeam.text(JSON.stringify(results[i].teams.away.name));
+		var awayScore = $("<li>").attr("class", "list-group-item");
+		awayScore.text(JSON.stringify(results[i].scores.away.total));
+
+		awayBox.append(awayTeam, awayScore);
+		homeBox.append(homeTeam, homeScore, awayBox);
+		$("#scores").append(homeBox);
+	}
 });
 }
+
+
+
+
+
 
 
 function scoreUpdater() {
@@ -39,6 +67,6 @@ function scoreUpdater() {
 	}) 
 }
 
+})
 
-displayNbaScores();
 
