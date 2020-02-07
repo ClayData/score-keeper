@@ -31,13 +31,22 @@ $.ajax(settings).then(function (response) {
 		//Home scores and teams
 		var homeBox = $("<ul>").attr("class", "list-group");
 		var homeTeam = $("<li>").attr("class", "list-group-item");
-		homeTeam.text(JSON.stringify(results[i].teams.home.name));
+		//get home team name and remove quotes from string
+		var homeText = JSON.stringify(results[i].teams.home.name);
+		var cleanHomeText = homeText.replace(/['"]/g, '')
+		homeTeam.text(cleanHomeText);
+
 		var homeScore = $("<li>").attr("class", "list-group-item");
 		homeScore.text(JSON.stringify(results[i].scores.home.total));
 		//Away scores and teams
 		var awayBox = $("<ul>").attr("class", "list-group");
+
 		var awayTeam = $("<li>").attr("class", "list-group-item");
-		awayTeam.text(JSON.stringify(results[i].teams.away.name));
+		var awayText = JSON.stringify(results[i].teams.away.name);
+		var cleanAwayText = awayText.replace(/['"]/g, '')
+		awayTeam.text(cleanAwayText);
+
+
 		var awayScore = $("<li>").attr("class", "list-group-item");
 		awayScore.text(JSON.stringify(results[i].scores.away.total));
 
