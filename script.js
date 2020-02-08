@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 $("#submit").on("click", function (){
 	event.preventDefault()
-	var yearInput = $("#year-input").val();
+	var yearInput = $("#exampleFormControlSelect1").val();
 	var monthInput = $("#month-input").val();
 	var dayInput = $("#day-input").val(); 
 	console.log(yearInput)
@@ -24,9 +24,9 @@ var settings = {
 }
 
 $.ajax(settings).then(function (response) {
-    console.log(response);
+    $("#scores").empty();
 	var results = response.response;
-	
+	console.log(results)
 	for(var i = 0; i < results.length; i++){
 		//Home scores and teams
 		var homeBox = $("<ul>").attr("class", "list-group");
@@ -37,7 +37,13 @@ $.ajax(settings).then(function (response) {
 		homeTeam.text(cleanHomeText);
 
 		var homeScore = $("<li>").attr("class", "list-group-item");
-		homeScore.text(JSON.stringify(results[i].scores.home.total));
+		var homeScoreText = JSON.stringify(results[i].scores.home.total)
+		if(homeScoreText != "null"){
+			homeScore.text(homeScoreText)
+		}
+		else{
+			homeScore.text("0")
+		}
 		//Away scores and teams
 		var awayBox = $("<ul>").attr("class", "list-group");
 
@@ -48,13 +54,20 @@ $.ajax(settings).then(function (response) {
 
 
 		var awayScore = $("<li>").attr("class", "list-group-item");
-		awayScore.text(JSON.stringify(results[i].scores.away.total));
-
+		var awayScoreText = JSON.stringify(results[i].scores.away.total)
+		if(awayScoreText != "null"){
+			awayScore.text(awayScoreText);
+		}
+		else{
+			awayScore.text("0");
+		}
 		awayBox.append(awayTeam, awayScore);
 		homeBox.append(homeTeam, homeScore, awayBox);
 		$("#scores").append(homeBox);
 	}
 });
+
+	scoreUpdater(y, m, d);
 }
 
 
@@ -63,17 +76,17 @@ $.ajax(settings).then(function (response) {
 
 
 
-function scoreUpdater() {
+function scoreUpdater(y, m, d) {
 	var secondsLeft = 20;
 	var timeInterval = setInterval(function() {
 		secondsLeft--;
 
 		if(secondsLeft === 0){
-			displayNbaScores();
+			displayNbaScores(y, m, d);
 			clearInterval(timeInterval)
 		}
 
-	}) 
+	}, 1000) 
 }
 
 })
