@@ -24,9 +24,11 @@ var settings = {
 }
 
 $.ajax(settings).then(function (response) {
-    $("#scores").empty();
+	$("#line-1").empty();
+	$("#line-2").empty();
 	var results = response.response;
 	console.log(results)
+	
 	for(var i = 0; i < results.length; i++){
 		//Home scores and teams
 		var homeBox = $("<ul>").attr("class", "list-group");
@@ -63,11 +65,18 @@ $.ajax(settings).then(function (response) {
 		}
 		awayBox.append(awayTeam, awayScore);
 		homeBox.append(homeTeam, homeScore, awayBox);
-		$("#scores").append(homeBox);
+
+		if (i % 2 === 0){
+			$("#line-1").append(homeBox);
+			console.log("appended");
+		}
+		else{
+			$("#line-2").append(homeBox);
+		}
 	}
 });
 
-	scoreUpdater(y, m, d);
+	// scoreUpdater(y, m, d);
 }
 
 
