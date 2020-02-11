@@ -1,7 +1,19 @@
+
+
 .date-text {
     padding: auto;
     font-size: 20px;
     margin-top: 15px;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.navbar {
+    background-color: #324376;
+    color: #fff;
+}
+
+.btn {
+    background-color: #586BA4;
+    color: #fff;
 }

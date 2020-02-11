@@ -12,14 +12,15 @@
     <title>2019-2020 Scores Tracker</title>
 </head>
 <body>
-        <nav class="navbar navbar-light bg-warning">
-            <span class="navbar-brand mb-0 h1">2019-2020 Score Tracker</span>
+        <nav class="navbar">
+            <span class="navbar-brand mb-0 h1">2019-2020 NBA Score Tracker</span>
         </nav>
         
     <div class="contianer">
 
         <div class="row">
-            <div class="col">
+            <div class="col-3"></div>
+            <div class="col-8 justify-content-center">
                 <form class="form-inline form-group" id="date-input">
                     <p class="date-text">Enter Date: </p>
                     <select class="form-control" id="exampleFormControlSelect1">
@@ -28,18 +29,21 @@
                     </select>    
                     <input type="text" class="form-control" placeholder="Month: MM" id="month-input" maxlength="2">
                     <input type="text" class="form-control" placeholder="Day: DD" id="day-input" maxlength="2">
-                    <button type="submit" class="btn btn-primary my-1" id="submit">Submit</button>
+                    <button type="submit" class="btn" id="submit">Submit</button>
                 </form>
             </div>
+            <div class="col-1"></div>
         </div>
             
         <div class="row" id="scores">
-            <div class="col-lg" id="line-1">
+            <div class="col-3"></div>
+            <div class="col-3" id="line-1">
 
             </div>
-            <div class="col-lg" id="line-2">
+            <div class="col-3" id="line-2">
 
             </div>
+            <div class="col-3"></div>
         </div>
     </div>
         
