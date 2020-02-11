@@ -34,7 +34,7 @@ function displayNbaScores(y, m, d){
 	for(var i = 0; i < results.length; i++){
 		//Home scores and teams
 		var homeBox = $("<div>").attr("class", "list-group");
-		var homeTeam = $("<button>").attr("class", "list-group-item");
+		var homeTeam = $("<button>").attr("class", "list-group-item list-group-item-action");
 		homeTeam.css({"background-color": "#586BA4"})
 		//get home team name and remove quotes from string
 		var homeText = JSON.stringify(results[i].hTeam.fullName);
@@ -43,17 +43,18 @@ function displayNbaScores(y, m, d){
 
 		var homeScore = $("<button>").attr("class", "list-group-item");
 		var homeScoreText = JSON.stringify(results[i].hTeam.score.points)
-		if(homeScoreText != "null"){
-			homeScore.text(homeScoreText)
+		var cleanHomeScore = homeScoreText.replace(/['"]/g, '');
+		if(cleanHomeScore === ""){
+			homeScore.text("0")
 		}
 		else{
-			homeScore.text("0")
+			homeScore.text(cleanHomeScore);
 		}
 		//Away scores and teams
 		var awayBox = $("<div>").attr("class", "list-group");
 		awayBox.css({ "margin-bottom": "20px"});
 
-		var awayTeam = $("<button>").attr("class", "list-group-item");
+		var awayTeam = $("<button>").attr("class", "list-group-item list-group-item-action");
 		awayTeam.css({ "background-color": "#586BA4"})
 		var awayText = JSON.stringify(results[i].vTeam.fullName);
 		var cleanAwayText = awayText.replace(/['"]/g, '')
@@ -62,18 +63,19 @@ function displayNbaScores(y, m, d){
 
 		var awayScore = $("<button>").attr("class", "list-group-item");
 		var awayScoreText = JSON.stringify(results[i].vTeam.score.points)
-		if(awayScoreText != "null"){
-			awayScore.text(awayScoreText);
+		var cleanAwayScore = awayScoreText.replace(/['"]/g, '');
+		console.log(cleanAwayScore);
+		if(cleanAwayScore ===  ""){
+			awayScore.text("0");
 		}
 		else{
-			awayScore.text("0");
+			awayScore.text(cleanAwayScore);
 		}
 		awayBox.append(awayTeam, awayScore);
 		homeBox.append(homeTeam, homeScore, awayBox);
 
 		if (i % 2 === 0){
 			$("#line-1").append(homeBox);
-			console.log("appended");
 		}
 		else{
 			$("#line-2").append(homeBox);
