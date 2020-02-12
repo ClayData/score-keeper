@@ -155,7 +155,13 @@ $(document).on("click", ".list-group-item-action", function (){
 	
 	$.ajax(settings).done(function (response) {
 		console.log(response);
+		var teamStats = response.api.statistics;
 
+		$("#fga").text("Field Goal Attemps: " + teamStats[aVh].fga);
+		$("#fgm").text("Field Goal Makes: " + teamStats[aVh].fgm);
+		$("#rebounds").text("Rebounds: " + teamStats[aVh].totReb);
+		$("#steals").text("Steals: " + teamStats[aVh].steals);
+		$("#blocks").text("Blocks: " + teamStats[aVh].blocks)
 	});
 })
 
